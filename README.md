@@ -2,8 +2,8 @@
 1. 3 layers created: Controller, Service and Repository layer
 2. H2 database is used for storing users and user types
 3. User types are assumed to be metadata. As given in requirements PATIENT and DOCTOR user types are stored in DB.
-4. In order to create usertypes, please run com.application.userservice.UserServiceApplicationTests.testLoadUserTypes test. This test's purpose is to create 2 user types.
-5. In order to create users, please run com.application.userservice.UserServiceApplicationTests.testUserCreationAddition test.
+4. In order to create usertypes, please run **com.application.userservice.UserServiceApplicationTests.testLoadUserTypes** test. This test's purpose is to create 2 user types.
+5. In order to create users, please run **com.application.userservice.UserServiceApplicationTests.testUserCreationAddition** test.
 6. com.application.userservice.UserServiceApplicationTests.testUserCreationAddition creates 1 user for each usertype. Totally 2 users.
 7. The User Entity has FullName, Email, UserType(FK for UserType entity), Id, UserId, AuditFields(CreatedBy, CreatedDate, LastModifiedBy, LastModifiedDate).
 8. Whenever User entity is created with fullName, email and existing usertype(metadata), the audit fields CreatedBy and CreatedDate are populated
@@ -26,6 +26,22 @@
 19. Error handling is done through GlobalExceptionHandler class. For now handling ResourceNotFoundException and general exception is considered internal server error for reducing scope of the project.(Time constraints)
 20. Error response composes the error with its details for User experience.
 21. Logging is done on controllers whenever an exception is thrown and debug enabled.
+22. Before running sample user payload, have to run **com.application.userservice.UserServiceApplicationTests.testLoadUserTypes** test for creating UserTypes
+
+## Execution steps:
+* Run Maven clean and install to run the **com/application/userservice/UserServiceApplicationTests.java**. This will create usertypes and users for you.
+* Then use below payload to post more users. The userType can be got by running /users/. 
+* Use the same usertype got from previous step to be used in payload.
+### **Sample User payload: Use the userType that is generated already in the below user payload so that constraint is not violated**
+
+{
+    "fullName": "Jim Jimmy",
+    "email": "jimmy111@gmail.com",
+    "userType": {
+    "userTypeId": 22,
+    "type": "DOCTOR"
+    }
+}
 
 ## **Things considered but NOT done as part of the project:**
 1. Extensive unit and integration tests are not written to cover many scenarios.
@@ -34,3 +50,10 @@
 4. I have added more functionalities around UserType which is not asked but thought would be easy to extend the UserType functionality through this way. (UserTypeServiceImpl.java).
 5. Added more user service related functionalities like bulk add which wasn't tested much due to time constraints.
 
+## Known issue:
+For creating user, existing usertype metadata information is needed in the payload. This design is an 
+issue when the rest api user doesn't have usertype information prior.
+
+Due to time constraints, I have not fixed this known issue.
+
+#### Fix to this issue would be asking user to pass UserType as value and get UserType and assign it during User entity creation.
