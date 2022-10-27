@@ -50,10 +50,14 @@
 4. I have added more functionalities around UserType which is not asked but thought would be easy to extend the UserType functionality through this way. (UserTypeServiceImpl.java).
 5. Added more user service related functionalities like bulk add which wasn't tested much due to time constraints.
 
+
 ## Known issue:
 For creating user, existing usertype metadata information is needed in the payload. This design is an 
 issue when the rest api user doesn't have usertype information prior.
 
 Due to time constraints, I have not fixed this known issue.
 
-#### Fix to this issue would be asking user to pass UserType as value and get UserType and assign it during User entity creation.
+
+#### Fix to this issue would be asking user to pass UserType as string value and query UserType from DB(Cache - faster) using the string value and assign it during User entity creation.
+
+
