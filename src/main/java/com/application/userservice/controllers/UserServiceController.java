@@ -1,7 +1,10 @@
 package com.application.userservice.controllers;
 
+import com.application.userservice.dtos.UserDTO;
 import com.application.userservice.entities.User;
+import com.application.userservice.entities.UserType;
 import com.application.userservice.exceptions.ResourceNotFoundException;
+import com.application.userservice.services.interfaces.UserTypeService;
 import com.application.userservice.services.interfaces.UsersService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +29,8 @@ public class UserServiceController
     private final Logger logger = LoggerFactory.getLogger(UserServiceController.class);
     @Autowired
     UsersService userService;
+    @Autowired
+    UserTypeService userTypeService;
 
 
     /**
@@ -62,6 +67,7 @@ public class UserServiceController
      * @param userId
      * @param user
      */
+    @Transactional
     @PutMapping("/updateusers/{id}")
     public ResponseEntity<User> updateUser (@PathVariable(value = "id") Long userId, @RequestBody User user)
             throws Exception {
@@ -78,7 +84,9 @@ public class UserServiceController
      */
     @Transactional
     @PostMapping("/users")
-    public User createUser(@RequestBody User user) {
+    public User createUser(@RequestBody UserDTO userdto) {
+        List<UserType> userType = userTypeService.findUserTypeByType(userdto.getUserType());
+        User user = new User(userdto.getFullName(), userdto.getEmail(), userType.get(0));
         return userService.addUser(user);
     }
 
