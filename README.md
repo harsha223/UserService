@@ -37,10 +37,7 @@
 {
     "fullName": "Jim Jimmy",
     "email": "jimmy111@gmail.com",
-    "userType": {
-    "userTypeId": 22,
-    "type": "DOCTOR"
-    }
+    "userType": "DOCTOR"
 }
 
 ## **Things considered but NOT done as part of the project:**
@@ -51,13 +48,5 @@
 5. Added more user service related functionalities like bulk add which wasn't tested much due to time constraints.
 
 
-## Known issue:
-For creating user, existing usertype metadata information is needed in the payload. This design is an 
-issue when the rest api user doesn't have usertype information prior.
-
-Due to time constraints, I have not fixed this known issue.
-
-
-#### Fix to this issue would be asking user to pass UserType as string value and query UserType from DB(Cache - faster) using the string value and assign it during User entity creation.
 
 
