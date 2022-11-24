@@ -37,10 +37,7 @@
 {
     "fullName": "Jim Jimmy",
     "email": "jimmy111@gmail.com",
-    "userType": {
-    "userTypeId": 22,
-    "type": "DOCTOR"
-    }
+    "userType": "DOCTOR"
 }
 
 ## **Things considered but NOT done as part of the project:**
