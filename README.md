@@ -1,4 +1,4 @@
-# 🧑‍💼 User Service
+# 🧑‍💼 User Service(Code can be downloaded from master branch)
 
 A **Spring Boot** application implementing a **3-layer architecture** (Controller, Service, Repository) for managing **Users** and **User Types** with an **H2 in-memory database**. The service provides CRUD operations, search functionality, and basic audit tracking for created entities.
 
